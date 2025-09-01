@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Projects</title>
+  <title>My Achievements</title>
   <!-- Font Awesome for social icons -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -18,7 +18,6 @@
       min-height: 100vh;
     }
 
-    /* Back to Home button */
     .back-home-btn {
       position: fixed;
       top: 20px;
@@ -55,8 +54,7 @@
       color: dodgerblue;
     }
 
-    /* Project container */
-    .projects-container {
+    .achievements-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 40px;
@@ -64,30 +62,30 @@
       margin: 0 auto;
     }
 
-    .project-block {
+    .achievement-block {
       display: flex;
       flex-direction: column;
       max-width: 320px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .project-block:nth-child(3n+1) {
+    .achievement-block:nth-child(3n+1) {
       margin-left: 0;
       margin-right: auto;
       text-align: left;
     }
-    .project-block:nth-child(3n+2) {
+    .achievement-block:nth-child(3n+2) {
       margin-left: auto;
       margin-right: auto;
       text-align: center;
     }
-    .project-block:nth-child(3n+3) {
+    .achievement-block:nth-child(3n+3) {
       margin-left: auto;
       margin-right: 0;
       text-align: right;
     }
 
-    .project-block img {
+    .achievement-block img {
       width: 100%;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
@@ -96,7 +94,7 @@
       display: block;
     }
 
-    .project-block img:hover {
+    .achievement-block img:hover {
       transform: scale(1.1);
       box-shadow: 0 10px 25px rgba(30, 144, 255, 0.6);
       z-index: 10;
@@ -110,7 +108,7 @@
 
     .caption h3 {
       margin: 0 0 6px 0;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 600;
       color: dodgerblue;
     }
@@ -128,11 +126,11 @@
     }
 
     @media (max-width: 600px) {
-      .projects-container {
+      .achievements-container {
         grid-template-columns: 1fr;
         gap: 30px;
       }
-      .project-block {
+      .achievement-block {
         margin-left: auto !important;
         margin-right: auto !important;
         text-align: center !important;
@@ -140,7 +138,6 @@
       }
     }
 
-    /* Footer styles */
     footer {
       background: #222;
       padding: 30px 20px;
@@ -170,40 +167,49 @@
 
   <a href="index.html" class="back-home-btn" aria-label="Back to home">Back to Home</a>
 
-  <h1>My Projects</h1>
+  <h1>My Achievements</h1>
 
-  <div class="projects-container">
+  <div class="achievements-container">
 
-    <div class="project-block">
-      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Project One" />
+    <div class="achievement-block">
+      <img src="Full Strack Web Development Certificate.jpeg" alt="Certificate 1" />
       <div class="caption">
-        <h3>Project One</h3>
-        <p>A responsive portfolio website built with HTML, CSS, and JavaScript showcasing my work and skills.</p>
-        <div class="date">Completed: June 2025</div>
+        <h3>Web Development Certificate</h3>
+        <p>Completed a full-stack web dev course with real-world projects and responsive design.</p>
+        <div class="date">Issued: April 2025</div>
       </div>
     </div>
 
-    <div class="project-block">
-      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Project Two" />
+    <div class="achievement-block">
+      <img src="Poster Making Compition.jpeg" alt="Certificate 2" />
       <div class="caption">
-        <h3>Project Two</h3>
-        <p>Developed a task management app with React and Firebase to help users organize their daily activities.</p>
-        <div class="date">Completed: March 2025</div>
+        <h3>Poster Making Compition</h3>
+        <p>Achiving 2nd position in inter-college poster making competition was a great honor.</p>
+        <div class="date">Issued: August 2024</div>
       </div>
     </div>
 
-    <div class="project-block">
-      <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Project Three" />
+    <div class="achievement-block">
+      <img src="https://images.unsplash.com/photo-1607082349250-228ba5c1bba3?auto=format&fit=crop&w=800&q=80" alt="Certificate 3" />
       <div class="caption">
-        <h3>Project Three</h3>
-        <p>Created an e-commerce website with integrated payment gateway and product filtering system.</p>
-        <div class="date">Completed: January 2025</div>
+        <h3>Hackathon Winner</h3>
+        <p>Won 1st place in a 24-hour hackathon building a productivity tool using React and Firebase.</p>
+        <div class="date">Awarded: January 2025</div>
+      </div>
+    </div>
+
+    <div class="achievement-block">
+      <img src="https://images.unsplash.com/photo-1618221691269-66b06ec68263?auto=format&fit=crop&w=800&q=80" alt="Appreciation" />
+      <div class="caption">
+        <h3>Appreciation from Internship</h3>
+        <p>Received recognition for performance and teamwork during a 3-month internship at a tech startup.</p>
+        <div class="date">Awarded: August 2024</div>
       </div>
     </div>
 
   </div>
 
-  <!-- Footer section -->
+  <!-- Footer -->
   <footer>
     <h2>Contact with me:</h2>
     <div class="social-links">
