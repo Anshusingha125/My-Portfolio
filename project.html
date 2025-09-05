@@ -18,7 +18,6 @@
       min-height: 100vh;
     }
 
-    /* Back to Home button */
     .back-home-btn {
       position: fixed;
       top: 20px;
@@ -39,10 +38,12 @@
       align-items: center;
       gap: 6px;
     }
+
     .back-home-btn:hover {
       background-color: #1e90ff;
       box-shadow: 0 6px 12px rgba(30, 144, 255, 0.6);
     }
+
     .back-home-btn::before {
       content: '←';
       font-weight: bold;
@@ -55,7 +56,6 @@
       color: dodgerblue;
     }
 
-    /* Project container */
     .projects-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -69,6 +69,7 @@
       flex-direction: column;
       max-width: 320px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
 
     .project-block:nth-child(3n+1) {
@@ -92,7 +93,6 @@
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       transition: transform 0.5s ease, box-shadow 0.3s ease;
-      cursor: pointer;
       display: block;
     }
 
@@ -132,6 +132,7 @@
         grid-template-columns: 1fr;
         gap: 30px;
       }
+
       .project-block {
         margin-left: auto !important;
         margin-right: auto !important;
@@ -140,7 +141,6 @@
       }
     }
 
-    /* Footer styles */
     footer {
       background: #222;
       padding: 30px 20px;
@@ -164,6 +164,73 @@
     .social-links a:hover {
       color: dodgerblue;
     }
+
+    /* Overlay styles */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .overlay.active {
+      display: flex;
+    }
+
+    .expanded-view {
+      background: #222;
+      color: #eee;
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 800px;
+      width: 90%;
+      display: flex;
+      gap: 30px;
+      animation: slideIn 0.4s ease forwards;
+      position: relative;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .expanded-view img {
+      max-width: 300px;
+      border-radius: 10px;
+    }
+
+    .details {
+      flex: 1;
+    }
+
+    .details h2 {
+      color: dodgerblue;
+      margin-bottom: 12px;
+    }
+
+    .details ul {
+      padding-left: 18px;
+    }
+
+    .details ul li {
+      margin-bottom: 6px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: #eee;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -173,7 +240,6 @@
   <h1>My Projects</h1>
 
   <div class="projects-container">
-
     <div class="project-block">
       <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Project One" />
       <div class="caption">
@@ -200,10 +266,8 @@
         <div class="date">Completed: January 2025</div>
       </div>
     </div>
-
   </div>
 
-  <!-- Footer section -->
   <footer>
     <h2>Contact with me:</h2>
     <div class="social-links">
@@ -214,6 +278,78 @@
       <a href="https://github.com/Anshusingha125" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
     </div>
   </footer>
+
+  <!-- Expanded View Overlay -->
+  <div class="overlay" id="overlay">
+    <div class="expanded-view" id="expandedView">
+      <img id="expandedImage" src="" alt="Expanded Project" />
+      <div class="details">
+        <h2 id="expandedTitle">Project Title</h2>
+        <p id="expandedDescription">This is a more detailed description of the project.</p>
+        <h3>Technologies Used:</h3>
+        <ul id="expandedTech"></ul>
+      </div>
+      <div class="close-btn" id="closeBtn">&times;</div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('overlay');
+    const expandedImage = document.getElementById('expandedImage');
+    const expandedTitle = document.getElementById('expandedTitle');
+    const expandedDescription = document.getElementById('expandedDescription');
+    const expandedTech = document.getElementById('expandedTech');
+    const closeBtn = document.getElementById('closeBtn');
+
+    const projectDetails = [
+      {
+        title: "Project One",
+        img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+        description: "A responsive portfolio website showcasing my work and skills in web development.",
+        tech: ["HTML", "CSS", "JavaScript", "Responsive Design"]
+      },
+      {
+        title: "Project Two",
+        img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80",
+        description: "A task management app with user authentication and real-time syncing using Firebase.",
+        tech: ["React", "Firebase", "JavaScript", "Material UI"]
+      },
+      {
+        title: "Project Three",
+        img: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80",
+        description: "An e-commerce platform with secure checkout and advanced filtering system.",
+        tech: ["HTML", "CSS", "JavaScript", "Stripe API", "Search Filter"]
+      }
+    ];
+
+    const projectBlocks = document.querySelectorAll('.project-block');
+
+    projectBlocks.forEach((block, index) => {
+      block.addEventListener('click', () => {
+        const project = projectDetails[index];
+        expandedImage.src = project.img;
+        expandedTitle.textContent = project.title;
+        expandedDescription.textContent = project.description;
+        expandedTech.innerHTML = '';
+        project.tech.forEach(tech => {
+          const li = document.createElement('li');
+          li.textContent = tech;
+          expandedTech.appendChild(li);
+        });
+        overlay.classList.add('active');
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('active');
+    });
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.classList.remove('active');
+      }
+    });
+  </script>
 
 </body>
 </html>

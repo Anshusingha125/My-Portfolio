@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>My Achievements</title>
-  <!-- Font Awesome for social icons -->
+
+  <!-- Font Awesome for icons -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -14,8 +15,7 @@
       margin: 0;
       background: #333;
       color: #eee;
-      padding: 40px 40px 100px 40px;
-      min-height: 100vh;
+      padding: 40px;
     }
 
     .back-home-btn {
@@ -24,34 +24,27 @@
       right: 20px;
       background-color: dodgerblue;
       color: white;
-      border: none;
       padding: 10px 18px;
       border-radius: 30px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(30, 144, 255, 0.4);
       text-decoration: none;
-      transition: background-color 0.3s ease;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 4px 8px rgba(30, 144, 255, 0.4);
+      z-index: 999;
     }
+
     .back-home-btn:hover {
       background-color: #1e90ff;
-      box-shadow: 0 6px 12px rgba(30, 144, 255, 0.6);
     }
+
     .back-home-btn::before {
-      content: '←';
-      font-weight: bold;
-      font-size: 1.2rem;
+      content: "← ";
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 40px;
       color: dodgerblue;
+      margin-bottom: 40px;
     }
 
     .achievements-container {
@@ -63,60 +56,34 @@
     }
 
     .achievement-block {
-      display: flex;
-      flex-direction: column;
-      max-width: 320px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: #444;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      cursor: pointer;
     }
 
-    .achievement-block:nth-child(3n+1) {
-      margin-left: 0;
-      margin-right: auto;
-      text-align: left;
-    }
-    .achievement-block:nth-child(3n+2) {
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
-    .achievement-block:nth-child(3n+3) {
-      margin-left: auto;
-      margin-right: 0;
-      text-align: right;
+    .achievement-block:hover {
+      transform: scale(1.03);
     }
 
     .achievement-block img {
       width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.5s ease, box-shadow 0.3s ease;
-      cursor: pointer;
       display: block;
-    }
-
-    .achievement-block img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 25px rgba(30, 144, 255, 0.6);
-      z-index: 10;
-      position: relative;
+      height: auto;
     }
 
     .caption {
-      margin-top: 12px;
-      color: #ddd;
+      padding: 15px;
     }
 
     .caption h3 {
-      margin: 0 0 6px 0;
-      font-size: 1.2rem;
-      font-weight: 600;
       color: dodgerblue;
+      margin-bottom: 6px;
     }
 
     .caption p {
-      margin: 0 0 6px 0;
-      font-size: 1rem;
-      line-height: 1.4;
+      margin: 0 0 8px;
     }
 
     .caption .date {
@@ -125,41 +92,96 @@
       opacity: 0.7;
     }
 
-    @media (max-width: 600px) {
-      .achievements-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      .achievement-block {
-        margin-left: auto !important;
-        margin-right: auto !important;
-        text-align: center !important;
-        max-width: 90%;
-      }
-    }
-
     footer {
-      background: #222;
-      padding: 30px 20px;
       text-align: center;
-      color: #ccc;
+      padding: 30px 20px;
+      background: #222;
       margin-top: 60px;
     }
 
     footer h2 {
       color: dodgerblue;
-      margin-bottom: 16px;
     }
 
     .social-links a {
-      color: #eee;
       margin: 0 12px;
       font-size: 1.5rem;
+      color: #eee;
       transition: color 0.3s;
     }
 
     .social-links a:hover {
       color: dodgerblue;
+    }
+
+    /* Popup Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .overlay.active {
+      display: flex;
+    }
+
+    .expanded-view {
+      background: #222;
+      color: #eee;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 800px;
+      width: 90%;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      position: relative;
+    }
+
+    .expanded-view img {
+      width: 300px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .details {
+      flex: 1;
+    }
+
+    .details h2 {
+      margin-top: 0;
+      color: dodgerblue;
+    }
+
+    .details p {
+      margin-bottom: 10px;
+    }
+
+    .details ul {
+      padding-left: 18px;
+      margin: 10px 0;
+    }
+
+    .details ul li {
+      margin-bottom: 6px;
+      list-style-type: square;
+      color: #ccc;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 2rem;
+      color: #eee;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -170,7 +192,6 @@
   <h1>My Achievements</h1>
 
   <div class="achievements-container">
-
     <div class="achievement-block">
       <img src="Full Strack Web Development Certificate.jpeg" alt="Certificate 1" />
       <div class="caption">
@@ -183,14 +204,14 @@
     <div class="achievement-block">
       <img src="Poster Making Compition.jpeg" alt="Certificate 2" />
       <div class="caption">
-        <h3>Poster Making Compition</h3>
-        <p>Achiving 2nd position in inter-college poster making competition was a great honor.</p>
+        <h3>Poster Making Competition</h3>
+        <p>Achieved 2nd place in inter-college poster making competition.</p>
         <div class="date">Issued: August 2024</div>
       </div>
     </div>
 
     <div class="achievement-block">
-      <img src="https://images.unsplash.com/photo-1607082349250-228ba5c1bba3?auto=format&fit=crop&w=800&q=80" alt="Certificate 3" />
+      <img src="https://images.unsplash.com/photo-1607082349250-228ba5c1bba3?auto=format&fit=crop&w=800&q=80" alt="Hackathon" />
       <div class="caption">
         <h3>Hackathon Winner</h3>
         <p>Won 1st place in a 24-hour hackathon building a productivity tool using React and Firebase.</p>
@@ -199,27 +220,127 @@
     </div>
 
     <div class="achievement-block">
-      <img src="https://images.unsplash.com/photo-1618221691269-66b06ec68263?auto=format&fit=crop&w=800&q=80" alt="Appreciation" />
+      <img src="https://images.unsplash.com/photo-1618221691269-66b06ec68263?auto=format&fit=crop&w=800&q=80" alt="Internship" />
       <div class="caption">
-        <h3>Appreciation from Internship</h3>
-        <p>Received recognition for performance and teamwork during a 3-month internship at a tech startup.</p>
+        <h3>Internship Appreciation</h3>
+        <p>Recognized for strong teamwork and performance at a 3-month internship.</p>
         <div class="date">Awarded: August 2024</div>
       </div>
     </div>
-
   </div>
 
   <!-- Footer -->
   <footer>
     <h2>Contact with me:</h2>
     <div class="social-links">
-      <a href="https://facebook.com/share/14JTKnLddCy/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://x.com/AnshuSingha29" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://linkedin.com/in/anshu-singha-010ab8337" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://instagram.com/yourprofile" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://github.com/Anshusingha125" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://facebook.com/share/14JTKnLddCy/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://x.com/AnshuSingha29" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://linkedin.com/in/anshu-singha-010ab8337" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://instagram.com/yourprofile" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://github.com/Anshusingha125" target="_blank"><i class="fab fa-github"></i></a>
     </div>
   </footer>
+
+  <!-- Popup -->
+  <div class="overlay" id="overlay">
+    <div class="expanded-view">
+      <img id="expandedImage" src="" alt="Expanded Achievement" />
+      <div class="details">
+        <h2 id="expandedTitle">Achievement Title</h2>
+        <p id="expandedDescription">Full description goes here...</p>
+        <ul id="expandedTech"></ul>
+        <p class="date" id="expandedDate">Date</p>
+      </div>
+      <div class="close-btn" id="closeBtn">&times;</div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const overlay = document.getElementById("overlay");
+    const expandedImage = document.getElementById("expandedImage");
+    const expandedTitle = document.getElementById("expandedTitle");
+    const expandedDescription = document.getElementById("expandedDescription");
+    const expandedDate = document.getElementById("expandedDate");
+    const expandedTech = document.getElementById("expandedTech");
+    const closeBtn = document.getElementById("closeBtn");
+
+    const achievements = document.querySelectorAll(".achievement-block");
+
+    const achievementDetails = [
+      {
+        title: "Web Development Certificate",
+        img: "Full Strack Web Development Certificate.jpeg",
+        description: "Completed a full-stack web development course with real-world projects and responsive design.",
+        date: "Issued: April 2025",
+        technologies: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Express", "MongoDB"]
+      },
+      {
+        title: "Poster Making Competition",
+        img: "Poster Making Compition.jpeg",
+        description: "Achieved 2nd place in inter-college poster making competition.",
+        date: "Issued: August 2024",
+        technologies: ["Adobe Photoshop", "Illustrator", "Creativity", "Time Management"]
+      },
+      {
+        title: "Hackathon Winner",
+        img: "https://images.unsplash.com/photo-1607082349250-228ba5c1bba3?auto=format&fit=crop&w=800&q=80",
+        description: "Won 1st place in a 24-hour hackathon building a productivity tool using React and Firebase.",
+        date: "Awarded: January 2025",
+        technologies: ["React", "Firebase", "JavaScript", "UI/UX Design", "Agile Methodology"]
+      },
+      {
+        title: "Internship Appreciation",
+        img: "https://images.unsplash.com/photo-1618221691269-66b06ec68263?auto=format&fit=crop&w=800&q=80",
+        description: "Recognized for strong teamwork and performance at a 3-month internship at a tech startup.",
+        date: "Awarded: August 2024",
+        technologies: ["Teamwork", "Communication", "Project Management", "Problem Solving"]
+      }
+    ];
+
+    achievements.forEach((achievement, index) => {
+      achievement.addEventListener("click", () => {
+        const detail = achievementDetails[index];
+        expandedImage.src = detail.img;
+        expandedImage.alt = detail.title;
+        expandedTitle.textContent = detail.title;
+        expandedDescription.textContent = detail.description;
+        expandedDate.textContent = detail.date;
+
+        // Clear previous tech list
+        expandedTech.innerHTML = "";
+        detail.technologies.forEach(tech => {
+          const li = document.createElement("li");
+          li.textContent = tech;
+          expandedTech.appendChild(li);
+        });
+
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden"; // Prevent background scroll
+      });
+    });
+
+    closeBtn.addEventListener("click", () => {
+      overlay.classList.remove("active");
+      document.body.style.overflow = "auto"; // Enable scroll back
+    });
+
+    // Close popup on clicking outside the expanded view
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) {
+        overlay.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+    });
+
+    // Close popup on ESC key press
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay.classList.contains("active")) {
+        overlay.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+    });
+  </script>
 
 </body>
 </html>
